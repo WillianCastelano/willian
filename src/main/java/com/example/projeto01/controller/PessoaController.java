@@ -5,10 +5,7 @@ import com.example.projeto01.DTO.PessoaRequest;
 import com.example.projeto01.model.Pessoa;
 import com.example.projeto01.service.PessoaService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/pessoas")
@@ -25,6 +22,25 @@ public class PessoaController {
         Pessoa pessoa = pessoaService.salvar(pessoaRequest);
         return ResponseEntity.ok(pessoa);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Pessoa> buscarPessoa (@PathVariable long id) {
+        Pessoa pessoa = pessoaService.buscarPorId(id);
+        return ResponseEntity.ok(pessoa);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Pessoa> atualizarPessoa(@PathVariable Long id, @RequestBody PessoaRequest pessoaRequest) {
+        Pessoa pessoaAtualizada = pessoaService.atualizar(id, pessoaRequest);
+        return ResponseEntity.ok(pessoaAtualizada);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarPessoa(@PathVariable Long id) {
+        pessoaService.deletar(id);
+        return ResponseEntity.noContent().build();
+    }
+
 
 
 
