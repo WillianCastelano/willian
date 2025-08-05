@@ -17,9 +17,14 @@ public class PessoaService {
     }
 
     public Pessoa salvar(PessoaRequest pessoaRequest) {
+        if (pessoaRequest.getNome() == null || pessoaRequest.getNome().isBlank()) {
+            throw new IllegalArgumentException("Nome é obrigatório.");
+        }
+
      Pessoa pessoa = new Pessoa();
      pessoa.setNome(pessoaRequest.getNome());
      pessoa.setIdade(pessoaRequest.getIdade());
+     pessoa.setSenha(pessoaRequest.getSenha());
      return pessoaRepository.save(pessoa);
 
     }
@@ -39,9 +44,14 @@ public class PessoaService {
         return pessoaRepository.save(pessoaExistente);
     }
 
-    public void deletar(Long id) {
-        Pessoa pessoa = buscarPorId(id);
-        pessoaRepository.delete(pessoa);
+    public String deletar(Long id) {
+        if (!pessoaRepository.existsById(id)) {
+            throw  new RuntimeException("Pessoa com ID " + id + "não encontrada.");
+        }
+
+
+        pessoaRepository.deleteById(id);
+        return "Pessoa com ID " + id + " foi deletada com sucesso!";
     }
 
 

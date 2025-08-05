@@ -13,5 +13,6 @@ public class PessoaRequest {
 
     private String nome;
     private int idade;
+    private  String senha;
 
 }

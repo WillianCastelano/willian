@@ -36,9 +36,9 @@ public class PessoaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarPessoa(@PathVariable Long id) {
-        pessoaService.deletar(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<String> deletarPessoa(@PathVariable Long id) {
+      String menssagem = pessoaService.deletar(id);
+      return ResponseEntity.ok(menssagem);
     }
 
 
