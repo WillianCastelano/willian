@@ -46,7 +46,7 @@ public class PessoaService {
 
     public String deletar(Long id) {
         if (!pessoaRepository.existsById(id)) {
-            throw  new RuntimeException("Pessoa com ID " + id + "não encontrada.");
+            throw  new RuntimeException("Pessoa com ID " + id + " não encontrada.");
         }
 
 
